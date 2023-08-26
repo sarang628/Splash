@@ -65,7 +65,7 @@ class SplashFragment : Fragment() {
             }
         })
 
-        mViewModel.isReady.observe(requireActivity(), Observer { aBoolean: Boolean? ->
+        mViewModel.isReady.observe(requireActivity(), Observer {
 
         })
 
