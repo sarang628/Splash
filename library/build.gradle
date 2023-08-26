@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
 
@@ -28,7 +29,7 @@ android {
     buildFeatures { compose true }
 
     composeOptions { kotlinCompilerExtensionVersion = "1.4.6" }
-    namespace 'com.sryang.splash'
+    namespace 'com.sarang.screen_splash'
 }
 
 dependencies {
