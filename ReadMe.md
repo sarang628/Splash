@@ -1,0 +1,1 @@
+export JAVA_HOME=/Users/sarangyang/Library/Java/JavaVirtualMachines/openjdk-17.0.2/Contents/Home
