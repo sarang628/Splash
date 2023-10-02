@@ -56,7 +56,7 @@ fun SplashScreen(onSuccess: (Int) -> Unit) {
     }
 
     LaunchedEffect(key1 = "", block = {
-        delay(3000)
+        delay(1000)
         onSuccess.invoke(0)
     })
 }
