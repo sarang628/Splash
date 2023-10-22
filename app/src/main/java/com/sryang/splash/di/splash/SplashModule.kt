@@ -16,10 +16,12 @@ class SplashModule {
     fun provideSplashService(
         sessionService: SessionService,
         apiLogin: ApiLogin
-        ): SplashService {
+    ): SplashService {
         return object : SplashService {
             override suspend fun checkSession(): Boolean {
-                apiLogin.sess
+                sessionService.getToken()?.let {
+                    return apiLogin.sessionCheck(it)
+                }
                 return false
             }
         }
