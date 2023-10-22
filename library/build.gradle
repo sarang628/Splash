@@ -33,25 +33,26 @@ android {
 }
 
 dependencies {
-    //hilt
-    def hiltVersion = '2.44'
-
-//navigation
-//    def navigationVersion = '2.4.0-alpha06'
-
-//    def torangImageLoaderVersion = 'f4a2359698'
-    def themeVersion = '7c191eb4e6'
-//    def navigationModuleVersion = 'd98f57435d'
-//    def repositoryVersion = '8d4bef8640'
-//    def baseFeedVersion = 'aa5b46f3e0'
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    /** hilt */
+
+    /** HILT */
     implementation "com.google.dagger:hilt-android:$hiltVersion"
-    kapt "com.google.dagger:hilt-compiler:$hiltVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
+
+    /** GOOGLE MAP */
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+    /** TEST */
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    // coroutines unit test
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1"
+
 
     /** compose */
-    def composeBom = platform('androidx.compose:compose-bom:2023.05.01')
+    def composeBom = platform('androidx.compose:compose-bom:2023.04.01')
     implementation composeBom
     androidTestImplementation composeBom
     //없으면 @Composable import 안됨
@@ -64,9 +65,43 @@ dependencies {
     //JetNews Main 따라하기
     implementation 'androidx.compose.material3:material3'
     implementation "androidx.compose.material3:material3-window-size-class"
-    // collectAsState
-    implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.1"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-compose"
+    def nav_version = "2.5.3"
+
+    /** Room */
+    def room_version = "2.5.1"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    // To use Kotlin annotation processing tool (kapt)
+    kapt "androidx.room:room-compiler:$room_version"
+    // optional - RxJava2 support for Room
+    implementation "androidx.room:room-rxjava2:$room_version"
+    // optional - RxJava3 support for Room
+    implementation "androidx.room:room-rxjava3:$room_version"
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation "androidx.room:room-guava:$room_version"
+    // optional - Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
+    // optional - Paging 3 Integration
+    implementation "androidx.room:room-paging:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+
+
+    /** Retrofit 리뷰 추가 시 multipart 때문에 추가 뷰모델 작업해야 함. */
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
+
+    implementation "androidx.navigation:navigation-compose:$nav_version"
+
+    // Make sure to also include the latest version of the Maps SDK for Android
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
+
+    // Optionally, you can include the Compose utils library for Clustering, etc.
+    implementation 'com.google.maps.android:maps-compose-utils:2.11.2'
+
+    // hiltViewModel
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
 
     /** local */
     implementation "com.github.sarang628:Theme:$themeVersion"
