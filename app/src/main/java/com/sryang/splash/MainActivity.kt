@@ -1,6 +1,7 @@
 package com.sryang.splash
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,7 +31,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SplashScreen(onLoginExpired = {})
+                    SplashScreen(onLoginExpired = {
+                        Log.d("MainActivity", "onLoginExpired")
+                    }, onSuccess = {
+                        Log.d("MainActivity", "onSuccess")
+                    })
                     
                     LoginRepositoryTest(loginRepository = loginRepository)
                 }

@@ -1,5 +1,6 @@
 package com.sarang.screen_splash.compose
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -30,7 +31,8 @@ import kotlinx.coroutines.delay
 @Composable
 fun SplashScreen(
     splashViewModel: SplashViewModel = hiltViewModel(),
-    onLoginExpired: () -> Unit
+    onLoginExpired: () -> Unit,
+    onSuccess: () -> Unit
 ) {
 
     val uiState by splashViewModel.uiState.collectAsState()
@@ -76,6 +78,10 @@ fun SplashScreen(
                 title = { Text(text = "Your login expired.") }
             )
         }
+
+        if (uiState.isLogin == true) {
+            onSuccess.invoke()
+        }
     }
 }
 
@@ -83,5 +89,9 @@ fun SplashScreen(
 @Composable
 fun PreviewSplashScreen() {
     val context = LocalContext.current
-    SplashScreen(onLoginExpired = {})
+    SplashScreen(onLoginExpired = {
+        Log.d("PreviewSplashScreen", "onLoginExpired")
+    }, onSuccess = {
+        Log.d("PreviewSplashScreen", "onSuccess")
+    })
 }
