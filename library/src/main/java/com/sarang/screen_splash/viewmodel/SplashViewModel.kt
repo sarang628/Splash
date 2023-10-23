@@ -13,7 +13,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class SplashUiState(
-    val isLogin: Boolean? = null
+    val isLogin: Boolean? = null,
+    val sessionExpired: Boolean? = null
 )
 
 /**
@@ -31,7 +32,8 @@ class SplashViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.emit(
                 uiState.value.copy(
-                    isLogin = splashService.checkSession()
+                    isLogin = splashService.isLogin(),
+                    sessionExpired = !splashService.checkSession()
                 )
             )
         }

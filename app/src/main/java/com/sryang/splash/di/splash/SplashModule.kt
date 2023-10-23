@@ -28,6 +28,12 @@ class SplashModule {
             override suspend fun logout() {
                 sessionService.removeToken()
             }
+
+            override suspend fun isLogin(): Boolean {
+                return sessionService.getToken() != null
+            }
+
+
         }
     }
 }

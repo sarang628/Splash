@@ -34,6 +34,7 @@ import kotlinx.coroutines.launch
 fun SplashScreen(
     splashViewModel: SplashViewModel = hiltViewModel(),
     onLoginExpired: () -> Unit,
+    unLogin: () -> Unit,
     onSuccess: () -> Unit
 ) {
 
@@ -70,7 +71,7 @@ fun SplashScreen(
             )
         }
 
-        if (uiState.isLogin == false) {
+        if (uiState.isLogin == true && uiState.sessionExpired == true) {
             AlertDialog(
                 onDismissRequest = { },
                 confirmButton = {
@@ -85,6 +86,8 @@ fun SplashScreen(
                 },
                 title = { Text(text = "Your login expired.") }
             )
+        } else if (uiState.isLogin == false) {
+            unLogin.invoke()
         }
 
         if (uiState.isLogin == true) {
@@ -101,5 +104,7 @@ fun PreviewSplashScreen() {
         Log.d("PreviewSplashScreen", "onLoginExpired")
     }, onSuccess = {
         Log.d("PreviewSplashScreen", "onSuccess")
+    }, unLogin = {
+
     })
 }

@@ -18,10 +18,10 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    
+
     @Inject
     lateinit var loginRepository: LoginRepository
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -35,8 +35,10 @@ class MainActivity : ComponentActivity() {
                         Log.d("MainActivity", "onLoginExpired")
                     }, onSuccess = {
                         Log.d("MainActivity", "onSuccess")
+                    }, unLogin = {
+                        Log.d("MainActivity", "unLogin")
                     })
-                    
+
                     LoginRepositoryTest(loginRepository = loginRepository)
                 }
             }
