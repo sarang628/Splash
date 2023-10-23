@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -27,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sarang.screen_splash.viewmodel.SplashViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun SplashScreen(
@@ -36,6 +38,7 @@ fun SplashScreen(
 ) {
 
     val uiState by splashViewModel.uiState.collectAsState()
+    val coroutine = rememberCoroutineScope()
 
     Column(
         Modifier
@@ -71,7 +74,12 @@ fun SplashScreen(
             AlertDialog(
                 onDismissRequest = { },
                 confirmButton = {
-                    Button(onClick = { onLoginExpired.invoke() }) {
+                    Button(onClick = {
+                        coroutine.launch {
+                            splashViewModel.logout()
+                            onLoginExpired.invoke()
+                        }
+                    }) {
                         Text(text = "확인")
                     }
                 },

@@ -24,6 +24,10 @@ class SplashModule {
                 }
                 return false
             }
+
+            override suspend fun logout() {
+                sessionService.removeToken()
+            }
         }
     }
 }

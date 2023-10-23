@@ -21,7 +21,7 @@ data class SplashUiState(
  */
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    splashService: SplashService
+    val splashService: SplashService
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SplashUiState())
@@ -34,6 +34,12 @@ class SplashViewModel @Inject constructor(
                     isLogin = splashService.checkSession()
                 )
             )
+        }
+    }
+
+    fun logout() {
+        viewModelScope.launch {
+            splashService.logout()
         }
     }
 
