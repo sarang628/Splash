@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.Button
@@ -84,7 +85,7 @@ fun SplashScreen(
                         Text(text = "확인")
                     }
                 },
-                title = { Text(text = "Your login expired.") }
+                title = { Text(text = "Your login expired.", fontSize = 16.sp) }
             )
         } else if (uiState.isLogin == false) {
             unLogin.invoke()
