@@ -29,7 +29,7 @@ android {
     buildFeatures { compose true }
 
     composeOptions { kotlinCompilerExtensionVersion = "1.4.6" }
-    namespace 'com.sarang.screen_splash'
+    namespace 'com.sryang.splash'
 }
 
 dependencies {
