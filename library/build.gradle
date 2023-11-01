@@ -102,7 +102,4 @@ dependencies {
 
     // hiltViewModel
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
-
-    /** local */
-    implementation "com.github.sarang628:Theme:$themeVersion"
 }

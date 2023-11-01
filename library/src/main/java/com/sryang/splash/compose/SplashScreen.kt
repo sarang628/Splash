@@ -39,7 +39,6 @@ fun SplashScreen(
     Column(
         Modifier
             .fillMaxSize()
-            .background(colorResource(id = com.sarang.theme.R.color.colorSecondaryLight))
     ) {
 
         Spacer(modifier = Modifier.height(100.dp))
@@ -49,7 +48,6 @@ fun SplashScreen(
         ) {
             Text(
                 text = "T O R A N G",
-                color = colorResource(id = com.sarang.theme.R.color.colorSecondary),
                 fontSize = 45.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -61,7 +59,6 @@ fun SplashScreen(
         ) {
             Text(
                 text = "Hit the spot",
-                color = colorResource(id = com.sarang.theme.R.color.colorSecondary),
                 fontSize = 20.sp
             )
         }
