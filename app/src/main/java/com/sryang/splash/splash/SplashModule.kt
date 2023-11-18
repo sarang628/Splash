@@ -1,7 +1,8 @@
-package com.sryang.splash.di.splash
+package com.sryang.splash.splash
 
 import com.sryang.splash.usecase.SplashUseCase
 import com.sryang.torang_repository.api.ApiLogin
+import com.sryang.torang_repository.data.dao.LoggedInUserDao
 import com.sryang.torang_repository.session.SessionService
 import dagger.Module
 import dagger.Provides
@@ -14,7 +15,8 @@ class SplashModule {
     @Provides
     fun provideSplashService(
         sessionService: SessionService,
-        apiLogin: ApiLogin
+        apiLogin: ApiLogin,
+        loggedInUserDao: LoggedInUserDao
     ): SplashUseCase {
         return object : SplashUseCase {
             override suspend fun checkSession(): Boolean {
@@ -26,6 +28,7 @@ class SplashModule {
 
             override suspend fun logout() {
                 sessionService.removeToken()
+                loggedInUserDao.clear()
             }
 
             override suspend fun isLogin(): Boolean {
