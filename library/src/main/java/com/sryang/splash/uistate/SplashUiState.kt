@@ -7,5 +7,6 @@ data class SplashUiState(
 enum class LoginState {
     LOGOUT,
     LOGIN,
-    SESSION_EXPIRED
+    SESSION_EXPIRED,
+    NETWORK_ERROR
 }

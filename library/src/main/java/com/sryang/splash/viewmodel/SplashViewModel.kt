@@ -10,6 +10,7 @@ import com.sryang.splash.usecase.SplashUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,28 +27,7 @@ class SplashViewModel @Inject constructor(
 
     init {
         //로그인 상태 체크
-        viewModelScope.launch {
-            // 토큰이 없다면 로그아웃 상태
-            if (!splashService.isLogin()) {
-                _uiState.emit(
-                    uiState.value.copy(
-                        loginState = LoginState.LOGOUT
-                    )
-                )
-            } else if (!splashService.checkSession()) { //세션체크
-                _uiState.emit(
-                    uiState.value.copy(
-                        loginState = LoginState.SESSION_EXPIRED
-                    )
-                )
-            } else { // 로그인
-                _uiState.emit(
-                    uiState.value.copy(
-                        loginState = LoginState.LOGIN
-                    )
-                )
-            }
-        }
+        checkLogin()
     }
 
     fun logout() {
@@ -111,6 +91,32 @@ class SplashViewModel @Inject constructor(
      */
     fun registerDevice() {
 
+    }
+
+    fun checkLogin() {
+        _uiState.update { it.copy(loginState = null) }
+
+        viewModelScope.launch {
+            // 토큰이 없다면 로그아웃 상태
+            if (!splashService.isLogin()) {
+                _uiState.update { it.copy(loginState = LoginState.LOGOUT) }
+                return@launch
+            }
+
+            try {
+                if (!splashService.checkSession()) { //세션체크
+                    _uiState.update { it.copy(loginState = LoginState.SESSION_EXPIRED) }
+                    return@launch
+                }
+            } catch (e: Exception) {
+                _uiState.update { it.copy(loginState = LoginState.NETWORK_ERROR) }
+                return@launch
+            }
+
+            // 로그인
+            _uiState.update { it.copy(loginState = LoginState.LOGIN) }
+
+        }
     }
 
     /**

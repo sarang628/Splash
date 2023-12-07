@@ -1,3 +1,6 @@
 [submodule "app/src/main/java/com/sryang/splash/di/splash_di"]
 	path = app/src/main/java/com/sryang/splash/di/splash_di
 	url = https://github.com/sarang628/splash_di.git
+[submodule "app/src/main/java/com/sryang/splash/di/repository"]
+	path = app/src/main/java/com/sryang/splash/di/repository
+	url = https://github.com/sarang628/repository.git
